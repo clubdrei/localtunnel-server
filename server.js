@@ -62,7 +62,7 @@ export default function(opt) {
         const isNewClientRequest = ctx.query['new'] !== undefined;
         if (isNewClientRequest) {
             const reqId = hri.random();
-            console.debug('making new client with id %s', reqId);
+            console.debug(`Making new client with id ${reqId}`);
             const info = await manager.newClient(reqId);
 
             const url = schema + '://' + info.id + '.' + ctx.request.host;
@@ -100,7 +100,7 @@ export default function(opt) {
             return;
         }
 
-        console.debug('making new client with id %s', reqId);
+        console.debug(`Making new client with id ${reqId}`);
         const info = await manager.newClient(reqId);
 
         const url = schema + '://' + info.id + '.' + ctx.request.host;

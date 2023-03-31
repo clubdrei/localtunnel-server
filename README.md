@@ -68,3 +68,12 @@ docker run -d \
     --net host \
     defunctzombie/localtunnel-server:latest --port 3000
 ```
+
+## Notes
+
+### Interesting forks
+
+- https://github.com/Enkora/localtunnel-server
+- https://github.com/currenttech/localtunnel-server
+- https://github.com/BURG3R5/localtunnel-server
+- https://github.com/Enkora/localtunnel-server

@@ -1,10 +1,10 @@
 import request from 'supertest';
 import assert from 'assert';
-import { Server as WebSocketServer } from 'ws';
+import { WebSocketServer } from 'ws';
 import WebSocket from 'ws';
 import net from 'net';
 
-import createServer from './server';
+import createServer from './server.js';
 
 describe('Server', () => {
     it('server starts and stops', async () => {
@@ -38,8 +38,10 @@ describe('Server', () => {
         const hostname = 'websocket-test';
         const server = createServer({
             domain: 'example.com',
+            lowerPortLimit: 40000,
+            upperPortLimit: 40002,
         });
-        await new Promise(resolve => server.listen(resolve));
+        await new Promise((resolve) => server.listen(resolve));
 
         const res = await request(server).get('/websocket-test');
         const localTunnelPort = res.body.port;
@@ -62,10 +64,10 @@ describe('Server', () => {
             });
         });
 
-        const ws = new WebSocket('http://localhost:' + server.address().port, {
+        const ws = new WebSocket('ws://localhost:' + server.address().port, {
             headers: {
                 host: hostname + '.example.com',
-            }
+            },
         });
 
         ws.on('open', () => {
@@ -79,8 +81,9 @@ describe('Server', () => {
             });
         });
 
+        ws.close();
         wss.close();
-        await new Promise(resolve => server.close(resolve));
+        server.close();
     });
 
     it('should support the /api/tunnels/:id/status endpoint', async () => {

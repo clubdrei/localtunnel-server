@@ -4,7 +4,7 @@ import http from 'http';
 import { hri } from 'human-readable-ids';
 import Router from 'koa-router';
 
-import ClientManager from './lib/ClientManager';
+import ClientManager from './lib/ClientManager.js';
 
 export default function(opt) {
     opt = opt || {};

@@ -1,0 +1,26 @@
+version: '3'
+services:
+  localtunnel-server:
+    image: clubdrei/localtunnel-server
+    restart: unless-stopped
+    environment:
+      # Specify the base domain name. This is optional if hosting localtunnel from a regular example.com domain.
+      # This is required if hosting a localtunnel server from a subdomain (i.e. lt.example.dom where clients will be client-app.lt.example.come
+      # Default: None - This environment variable is required!
+      LOCALTUNNEL_DOMAIN: "your-tunnel.example.com"
+      # Use this flag to indicate proxy over https
+      # Possible values: 0 or 1
+      # Default: 0
+      LOCALTUNNEL_SECURE: "0"
+      # Listen on this port for outside requests
+      # Default: 80
+      LOCALTUNNEL_PORT: "80"
+      # Maximum number of tcp sockets each client is allowed to establish at one time (the tunnels)
+      # Default: 10
+      LOCALTUNNEL_MAX_SOCKETS: "10"
+      # Port start range to use for localtunnel clients to connect to
+      # Default: 1024
+      LOCALTUNNEL_CLIENT_MIN_PORT_RANGE: "1024"
+      # Port end range to use for localtunnel clients to connect to
+      # Default: 65535
+      LOCALTUNNEL_CLIENT_MAX_PORT_RANGE: "65535"

@@ -9,11 +9,11 @@ util.inspect.defaultOptions.compact = true;
 const argv = {
     domain: process.env.LOCALTUNNEL_DOMAIN,
     secure: Boolean(getEnvironmentValue('LOCALTUNNEL_SECURE', false)),
-    port: getEnvironmentValue('LOCALTUNNEL_PORT', 80),
+    port: Number.parseInt(getEnvironmentValue('LOCALTUNNEL_PORT', 80), 10),
     address: getEnvironmentValue('LOCALTUNNEL_ADDRESS', '0.0.0.0'),
-    'max-sockets': getEnvironmentValue('LOCALTUNNEL_MAX_SOCKETS', 10),
-    'client-min-port-range': getEnvironmentValue('LOCALTUNNEL_CLIENT_MIN_PORT_RANGE', 1024),
-    'client-max-port-range': getEnvironmentValue('LOCALTUNNEL_CLIENT_MAX_PORT_RANGE', 65535),
+    'max-sockets': Number.parseInt(getEnvironmentValue('LOCALTUNNEL_MAX_SOCKETS', 10), 10),
+    'client-min-port-range': Number.parseInt(getEnvironmentValue('LOCALTUNNEL_CLIENT_MIN_PORT_RANGE', 1024), 10),
+    'client-max-port-range': Number.parseInt(getEnvironmentValue('LOCALTUNNEL_CLIENT_MAX_PORT_RANGE', 65535), 10),
 }
 
 console.debug('Create server with the following options:', argv);

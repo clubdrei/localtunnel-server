@@ -1,0 +1,39 @@
+version: '3'
+services:
+  localtunnel_server:
+    build:
+      context: ../
+      dockerfile: ./Dockerfile
+    environment:
+      LOCALTUNNEL_DOMAIN: "localtunnel-server.localhost"
+    networks:
+      default:
+        aliases:
+          - "localtunnel-server.localhost"
+          - "client-1.localtunnel-server.localhost"
+          - "client-2.localtunnel-server.localhost"
+    ports:
+      - "127.0.0.1:36000:80"
+  localtunnel_client_1:
+    image: clubdrei/localtunnel-client
+    restart: unless-stopped
+    environment:
+      LOCALTUNNEL_HOST: "localtunnel-server.localhost"
+      LOCALTUNNEL_SUBDOMAIN: "client-1"
+      LOCALTUNNEL_LOCAL_HOST: "webserver"
+    depends_on:
+      - localtunnel_server
+      - webserver
+  localtunnel_client_2:
+    image: clubdrei/localtunnel-client
+    restart: unless-stopped
+    environment:
+      LOCALTUNNEL_HOST: "localtunnel-server.localhost"
+      LOCALTUNNEL_SUBDOMAIN: "client-2"
+      LOCALTUNNEL_LOCAL_HOST: "webserver"
+    depends_on:
+      - localtunnel_server
+      - webserver
+  webserver:
+    image: nginx:stable-alpine-slim
+    restart: unless-stopped

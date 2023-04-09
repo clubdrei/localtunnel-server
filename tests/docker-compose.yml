@@ -6,6 +6,7 @@ services:
       dockerfile: ./Dockerfile
     environment:
       LOCALTUNNEL_DOMAIN: "localtunnel-server.localhost"
+      LOCALTUNNEL_SECURE: "false"
     networks:
       default:
         aliases:
@@ -19,6 +20,7 @@ services:
     restart: unless-stopped
     environment:
       LOCALTUNNEL_HOST: "localtunnel-server.localhost"
+      LOCALTUNNEL_SECURE: "false"
       LOCALTUNNEL_SUBDOMAIN: "client-1"
       LOCALTUNNEL_LOCAL_HOST: "webserver"
     depends_on:
@@ -29,6 +31,7 @@ services:
     restart: unless-stopped
     environment:
       LOCALTUNNEL_HOST: "localtunnel-server.localhost"
+      LOCALTUNNEL_SECURE: "false"
       LOCALTUNNEL_SUBDOMAIN: "client-2"
       LOCALTUNNEL_LOCAL_HOST: "webserver"
     depends_on:

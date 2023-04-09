@@ -9,7 +9,7 @@ services:
       # Default: None - This environment variable is required!
       LOCALTUNNEL_DOMAIN: "your-tunnel.example.com"
       # Use this flag to indicate proxy over https
-      # Possible values: 0 or 1
+      # Possible values: 0, "false", 1 or "true"
       # Default: 0
       LOCALTUNNEL_SECURE: "0"
       # Listen on this port for outside requests
